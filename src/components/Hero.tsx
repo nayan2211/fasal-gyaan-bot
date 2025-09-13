@@ -1,8 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Sprout, Brain, Smartphone } from "lucide-react";
 import heroImage from "@/assets/hero-farming.jpg";
 
 export const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -33,13 +36,22 @@ export const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button variant="hero" size="lg" className="text-lg px-8 py-4">
+          <Button 
+            size="lg" 
+            className="text-lg px-8 py-4 bg-primary hover:bg-primary/90"
+            onClick={() => navigate('/auth')}
+          >
             <Brain className="h-5 w-5 mr-2" />
             Get Crop Recommendations
           </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-earth-brown">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-earth-brown"
+            onClick={() => navigate('/auth')}
+          >
             <Smartphone className="h-5 w-5 mr-2" />
-            Download App
+            किसान पोर्टल / Farmer Portal
           </Button>
         </div>
 

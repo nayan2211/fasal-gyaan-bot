@@ -14,7 +14,141 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      crop_recommendations: {
+        Row: {
+          created_at: string
+          crop_name: string
+          crop_variety: string | null
+          expected_yield: number | null
+          harvesting_date: string | null
+          id: string
+          profit_margin: number | null
+          recommendation_reason: string | null
+          season: string | null
+          sowing_date: string | null
+          sustainability_score: number | null
+          user_id: string
+          water_requirement: string | null
+        }
+        Insert: {
+          created_at?: string
+          crop_name: string
+          crop_variety?: string | null
+          expected_yield?: number | null
+          harvesting_date?: string | null
+          id?: string
+          profit_margin?: number | null
+          recommendation_reason?: string | null
+          season?: string | null
+          sowing_date?: string | null
+          sustainability_score?: number | null
+          user_id: string
+          water_requirement?: string | null
+        }
+        Update: {
+          created_at?: string
+          crop_name?: string
+          crop_variety?: string | null
+          expected_yield?: number | null
+          harvesting_date?: string | null
+          id?: string
+          profit_margin?: number | null
+          recommendation_reason?: string | null
+          season?: string | null
+          sowing_date?: string | null
+          sustainability_score?: number | null
+          user_id?: string
+          water_requirement?: string | null
+        }
+        Relationships: []
+      }
+      farm_data: {
+        Row: {
+          created_at: string
+          id: string
+          latitude: number | null
+          longitude: number | null
+          nitrogen_level: string | null
+          organic_matter: number | null
+          ph_level: number | null
+          phosphorus_level: string | null
+          potassium_level: string | null
+          previous_crops: string[] | null
+          soil_type: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          nitrogen_level?: string | null
+          organic_matter?: number | null
+          ph_level?: number | null
+          phosphorus_level?: string | null
+          potassium_level?: string | null
+          previous_crops?: string[] | null
+          soil_type?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          nitrogen_level?: string | null
+          organic_matter?: number | null
+          ph_level?: number | null
+          phosphorus_level?: string | null
+          potassium_level?: string | null
+          previous_crops?: string[] | null
+          soil_type?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          id: string
+          irrigation_type: string | null
+          land_size: number | null
+          language_preference: string | null
+          location: string | null
+          name: string
+          phone_number: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          irrigation_type?: string | null
+          land_size?: number | null
+          language_preference?: string | null
+          location?: string | null
+          name: string
+          phone_number?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          irrigation_type?: string | null
+          land_size?: number | null
+          language_preference?: string | null
+          location?: string | null
+          name?: string
+          phone_number?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
