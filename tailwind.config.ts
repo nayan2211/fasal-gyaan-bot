@@ -57,6 +57,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Agricultural theme colors
+        earth: {
+          brown: "hsl(var(--earth-brown))",
+          gold: "hsl(var(--harvest-gold))",
+          green: "hsl(var(--crop-green))",
+          blue: "hsl(var(--sky-blue))",
+          soil: "hsl(var(--fertile-soil))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
