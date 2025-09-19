@@ -14,12 +14,22 @@ import {
   LogOut,
   Thermometer,
   Wind,
-  Eye
+  Eye,
+  Mic,
+  Award
 } from 'lucide-react';
+import { FarmMascot } from '@/components/FarmMascot';
+import { VoiceInterface } from '@/components/VoiceInterface';
+import { AchievementBadge } from '@/components/AchievementBadge';
 
 const Dashboard = () => {
   const { user, signOut, loading } = useAuth();
   const navigate = useNavigate();
+  const [showMascot, setShowMascot] = useState(true);
+  const [showVoiceInterface, setShowVoiceInterface] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [mascotMessage, setMascotMessage] = useState('');
+  
   const [weatherData] = useState({
     temperature: 28,
     humidity: 65,
@@ -36,6 +46,10 @@ const Dashboard = () => {
     moisture: 45
   });
 
+  const [dailyQuote] = useState(
+    "🌱 आज मिट्टी की जांच का दिन है! अच्छी फसल के लिए स्वस्थ मिट्टी जरूरी है। / Today is soil testing day! Healthy soil is essential for good crops."
+  );
+
   useEffect(() => {
     if (!loading && !user) {
       navigate('/auth');
@@ -48,13 +62,21 @@ const Dashboard = () => {
   };
 
   const menuItems = [
-    { title: 'फसल सुझाव / Crop Recommendation', icon: Sprout, path: '/crop-recommendation', color: 'bg-earth-green' },
-    { title: 'मिट्टी विश्लेषण / Soil Analysis', icon: Eye, path: '/soil-analysis', color: 'bg-earth-brown' },
-    { title: 'बाजार मूल्य / Market Prices', icon: TrendingUp, path: '/market-prices', color: 'bg-earth-gold' },
-    { title: 'AI सहायक / AI Assistant', icon: MessageCircle, path: '/chatbot', color: 'bg-earth-blue' },
-    { title: 'रिपोर्ट / Reports', icon: FileText, path: '/reports', color: 'bg-primary' },
-    { title: 'सेटिंग्स / Settings', icon: Settings, path: '/settings', color: 'bg-muted' }
+    { title: 'फसल सुझाव / Crop Recommendation', icon: Sprout, path: '/crop-recommendation', color: 'bg-earth-green', desc: 'AI की मदद से सबसे अच्छी फसल चुनें' },
+    { title: 'मिट्टी विश्लेषण / Soil Analysis', icon: Eye, path: '/soil-analysis', color: 'bg-earth-brown', desc: 'अपनी मिट्टी की सेहत जांचें' },
+    { title: 'बाजार मूल्य / Market Prices', icon: TrendingUp, path: '/market-prices', color: 'bg-earth-gold', desc: 'आज के ताजे भाव देखें' },
+    { title: 'वॉयस सहायक / Voice Assistant', icon: Mic, path: '#', color: 'bg-earth-orange', desc: 'बोलकर पूछें, जवाब पाएं', action: () => setShowVoiceInterface(!showVoiceInterface) }
   ];
+
+  const handleVoiceResult = (text: string, language: string) => {
+    setMascotMessage(`आपने कहा: "${text}" - मैं इसका जवाब ढूंढ रहा हूं! / You said: "${text}" - I'm finding the answer!`);
+    setShowMascot(true);
+    
+    // Simulate AI response
+    setTimeout(() => {
+      setMascotMessage('🌾 यह बहुत अच्छा सवाल है! आपकी मिट्टी के लिए गेहूं एक बेहतरीन विकल्प है। / That\'s a great question! Wheat is an excellent choice for your soil.');
+    }, 2000);
+  };
 
   if (loading) {
     return (
@@ -94,8 +116,31 @@ const Dashboard = () => {
       </header>
 
       <div className="container mx-auto px-4 py-6 space-y-6">
+        {/* Daily Quote Card */}
+        <Card className="border-2 border-earth-gold/30 bg-gradient-warm/10 shadow-warm">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <span className="text-3xl">👨‍🌾</span>
+              <div className="flex-1">
+                <h3 className="font-semibold text-earth-brown mb-1">आज का संदेश / Today's Message</h3>
+                <p className="text-sm text-foreground leading-relaxed">{dailyQuote}</p>
+              </div>
+              <AchievementBadge achievements={[]} isCompact={true} />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Voice Interface */}
+        {showVoiceInterface && (
+          <VoiceInterface
+            onVoiceResult={handleVoiceResult}
+            isListening={isListening}
+            onToggleListening={() => setIsListening(!isListening)}
+          />
+        )}
+
         {/* Weather Card */}
-        <Card className="border-0 shadow-lg bg-gradient-to-r from-earth-blue to-earth-green text-white">
+        <Card className="border-0 shadow-warm bg-gradient-to-r from-earth-blue to-earth-mint text-white">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-white">
               <Cloud className="w-5 h-5" />
@@ -201,23 +246,55 @@ const Dashboard = () => {
         </Card>
 
         {/* Navigation Menu */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {menuItems.map((item, index) => (
             <Card 
               key={index} 
-              className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
-              onClick={() => navigate(item.path)}
+              className="border-0 shadow-warm hover:shadow-lg transition-all duration-300 cursor-pointer group bg-gradient-to-br from-card to-card/80"
+              onClick={() => item.action ? item.action() : navigate(item.path)}
             >
-              <CardContent className="p-6 text-center">
-                <div className={`w-12 h-12 ${item.color} rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
-                  <item.icon className="w-6 h-6 text-white" />
+              <CardContent className="p-6 text-center space-y-3">
+                <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-lg`}>
+                  <item.icon className="w-8 h-8 text-white" />
                 </div>
-                <p className="font-medium text-sm leading-tight">{item.title}</p>
+                <div>
+                  <p className="font-semibold text-sm leading-tight mb-1">{item.title}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
               </CardContent>
             </Card>
           ))}
         </div>
+
+        {/* Achievements Section */}
+        <Card 
+          className="border-2 border-achievement-gold/30 shadow-warm cursor-pointer hover:shadow-lg transition-all duration-300"
+          onClick={() => navigate('/achievements')}
+        >
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-achievement-gold rounded-full flex items-center justify-center">
+                  <Award className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">उपलब्धियां / Achievements</h3>
+                  <p className="text-sm text-muted-foreground">अपनी प्रगति देखें</p>
+                </div>
+              </div>
+              <AchievementBadge achievements={[]} isCompact={true} />
+            </div>
+          </CardContent>
+        </Card>
       </div>
+
+      {/* Farm Mascot */}
+      <FarmMascot
+        isVisible={showMascot}
+        message={mascotMessage}
+        onClose={() => setShowMascot(false)}
+        position="bottom-right"
+      />
     </div>
   );
 };

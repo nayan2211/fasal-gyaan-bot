@@ -57,13 +57,21 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Agricultural theme colors
+        // Lovable agricultural theme colors
         earth: {
           brown: "hsl(var(--earth-brown))",
           gold: "hsl(var(--harvest-gold))",
           green: "hsl(var(--crop-green))",
           blue: "hsl(var(--sky-blue))",
           soil: "hsl(var(--fertile-soil))",
+          orange: "hsl(var(--warm-orange))",
+          mint: "hsl(var(--nature-mint))",
+          sunset: "hsl(var(--sunset-red))",
+        },
+        achievement: {
+          bronze: "hsl(var(--achievement-bronze))",
+          silver: "hsl(var(--achievement-silver))",
+          gold: "hsl(var(--achievement-gold))",
         },
       },
       borderRadius: {

@@ -29,21 +29,32 @@ All colors MUST be HSL.
     --accent: 35 85% 60%;
     --accent-foreground: 0 0% 98%;
 
-    /* Agricultural color palette */
-    --earth-brown: 35 45% 35%;
-    --harvest-gold: 35 85% 60%;
-    --crop-green: 120 60% 25%;
-    --sky-blue: 210 75% 55%;
-    --fertile-soil: 25 40% 45%;
+    /* Agricultural lovable color palette */
+    --earth-brown: 25 45% 45%;
+    --harvest-gold: 45 95% 55%;
+    --crop-green: 120 65% 35%;
+    --sky-blue: 210 80% 60%;
+    --fertile-soil: 30 50% 40%;
+    --warm-orange: 25 85% 65%;
+    --nature-mint: 165 65% 45%;
+    --sunset-red: 15 80% 60%;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--crop-green)), hsl(var(--sky-blue)));
+    /* Lovable gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--crop-green)), hsl(var(--nature-mint)));
     --gradient-earth: linear-gradient(180deg, hsl(var(--harvest-gold)), hsl(var(--earth-brown)));
-    --gradient-success: linear-gradient(135deg, hsl(120 60% 25%), hsl(120 50% 40%));
+    --gradient-success: linear-gradient(135deg, hsl(120 65% 35%), hsl(120 55% 50%));
+    --gradient-warm: linear-gradient(135deg, hsl(var(--warm-orange)), hsl(var(--harvest-gold)));
+    --gradient-sky: linear-gradient(180deg, hsl(var(--sky-blue)), hsl(var(--nature-mint)));
     
-    /* Shadows */
-    --shadow-farm: 0 4px 20px hsl(var(--earth-brown) / 0.15);
-    --shadow-card: 0 2px 10px hsl(120 10% 15% / 0.1);
+    /* Enhanced shadows with warmth */
+    --shadow-farm: 0 8px 32px hsl(var(--earth-brown) / 0.2);
+    --shadow-card: 0 4px 20px hsl(120 10% 15% / 0.1);
+    --shadow-warm: 0 8px 32px hsl(var(--warm-orange) / 0.25);
+    
+    /* Achievement colors */
+    --achievement-bronze: 30 60% 50%;
+    --achievement-silver: 0 0% 75%;
+    --achievement-gold: 45 100% 60%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
