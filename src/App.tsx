@@ -8,6 +8,11 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import { FarmerProfile } from "./components/FarmerProfile";
+import { MarketPrices } from "./components/MarketPrices";
+import { DiseaseDetection } from "./components/DiseaseDetection";
+import { GovernmentSchemes } from "./components/GovernmentSchemes";
+import { CropRecommendation } from "./components/CropRecommendation";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +27,11 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<FarmerProfile />} />
+            <Route path="/market-prices" element={<MarketPrices />} />
+            <Route path="/disease-detection" element={<DiseaseDetection />} />
+            <Route path="/government-schemes" element={<GovernmentSchemes />} />
+            <Route path="/crop-recommendation" element={<CropRecommendation />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -63,8 +63,10 @@ const Dashboard = () => {
 
   const menuItems = [
     { title: 'फसल सुझाव / Crop Recommendation', icon: Sprout, path: '/crop-recommendation', color: 'bg-earth-green', desc: 'AI की मदद से सबसे अच्छी फसल चुनें' },
-    { title: 'मिट्टी विश्लेषण / Soil Analysis', icon: Eye, path: '/soil-analysis', color: 'bg-earth-brown', desc: 'अपनी मिट्टी की सेहत जांचें' },
+    { title: 'रोग पहचान / Disease Detection', icon: Eye, path: '/disease-detection', color: 'bg-earth-brown', desc: 'फोटो से पौधों की बीमारी पहचानें' },
     { title: 'बाजार मूल्य / Market Prices', icon: TrendingUp, path: '/market-prices', color: 'bg-earth-gold', desc: 'आज के ताजे भाव देखें' },
+    { title: 'सरकारी योजना / Govt Schemes', icon: FileText, path: '/government-schemes', color: 'bg-earth-sunset', desc: 'सब्सिडी और योजनाओं की जानकारी' },
+    { title: 'प्रोफाइल / Profile', icon: Settings, path: '/profile', color: 'bg-earth-blue', desc: 'अपनी जानकारी अपडेट करें' },
     { title: 'वॉयस सहायक / Voice Assistant', icon: Mic, path: '#', color: 'bg-earth-orange', desc: 'बोलकर पूछें, जवाब पाएं', action: () => setShowVoiceInterface(!showVoiceInterface) }
   ];
 
@@ -246,20 +248,20 @@ const Dashboard = () => {
         </Card>
 
         {/* Navigation Menu */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           {menuItems.map((item, index) => (
             <Card 
               key={index} 
               className="border-0 shadow-warm hover:shadow-lg transition-all duration-300 cursor-pointer group bg-gradient-to-br from-card to-card/80"
               onClick={() => item.action ? item.action() : navigate(item.path)}
             >
-              <CardContent className="p-6 text-center space-y-3">
-                <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-lg`}>
-                  <item.icon className="w-8 h-8 text-white" />
+              <CardContent className="p-4 lg:p-6 text-center space-y-3">
+                <div className={`w-12 h-12 lg:w-16 lg:h-16 ${item.color} rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-lg`}>
+                  <item.icon className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm leading-tight mb-1">{item.title}</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                  <p className="font-semibold text-xs lg:text-sm leading-tight mb-1">{item.title}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed hidden lg:block">{item.desc}</p>
                 </div>
               </CardContent>
             </Card>
